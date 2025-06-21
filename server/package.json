@@ -1,5 +1,5 @@
 {
-  "name": "cv builder backend",
+  "name": "cv-builder-backend",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
