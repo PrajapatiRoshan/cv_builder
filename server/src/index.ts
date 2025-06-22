@@ -15,10 +15,10 @@ import educationRoute from './routes/educations.route';
 import workExpRoute from './routes/workExp.route';
 import skillRoute from './routes/skills.route';
 import projectRoute from './routes/project.route';
+import path from 'path';
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
-const path = require('path');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

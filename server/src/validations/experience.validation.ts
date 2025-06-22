@@ -12,18 +12,19 @@ export const ctcValid = z.number().positive().min(1);
 export const joinDateValid = z
   .string()
   .trim()
-  .optional()
   .refine((value) => !value || !isNaN(Date.parse(value)), {
     message: 'Invalid date. please provide valide details',
-  });
+  })
+  .transform((value) => new Date(value));
 
 export const leaveDateValid = z
   .string()
   .trim()
   .optional()
   .refine((value) => !value || !isNaN(Date.parse(value)), {
-    message: 'Invalid date. please provide valide details',
-  });
+    message: 'Invalid date. Please provide valid details',
+  })
+  .transform((value) => (value ? new Date(value) : undefined));
 
 export const experienceSchemaValid = z.object({
   companyName: companyNameValid,
@@ -34,5 +35,8 @@ export const experienceSchemaValid = z.object({
   leaveDate: leaveDateValid,
   techStack: techStackValid,
   description: descriptionValid,
+  fontSize: z.number().min(1).max(99).optional(),
+  fontFamily: z.string().optional(),
+  fontColor: z.string().optional(),
 });
 

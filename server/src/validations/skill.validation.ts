@@ -10,5 +10,8 @@ export const skillSchemaValid = z.object({
   skillName: skillNameValid,
   skillLevel: skillLevelValid,
   experienceYears: experienceYearsValid,
+  fontSize: z.number().min(1).max(99).optional(),
+  fontFamily: z.string().optional(),
+  fontColor: z.string().optional(),
 });
 

@@ -12,5 +12,8 @@ export const userDetailSchemaValid = z.object({
   pincode: pincodeSchema,
   dob: dateValid,
   summary: z.string().trim(),
+  fontSize: z.number().min(1).max(99).optional(),
+  fontFamily: z.string().optional(),
+  fontColor: z.string().optional(),
 });
 

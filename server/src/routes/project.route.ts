@@ -1,11 +1,17 @@
 import { Router } from 'express';
+import {
+  addProjectController,
+  getAllProjectController,
+  getDetailProjectController,
+  updateProjectController,
+} from '../controller/project.controller';
 
 const projectRoute = Router();
 
-projectRoute.post('/addProject');
-projectRoute.get('/detailProject/:id/get');
-projectRoute.get('/allProjects');
-projectRoute.put('/updateProject/:id/update');
+projectRoute.post('/addProject', addProjectController);
+projectRoute.get('/detailProject/:id/get', getDetailProjectController);
+projectRoute.get('/allProjects', getAllProjectController);
+projectRoute.put('/updateProject/:id/update', updateProjectController);
 
 export default projectRoute;
 

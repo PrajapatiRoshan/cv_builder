@@ -1,7 +1,6 @@
 import { Document, model, Schema, Types } from 'mongoose';
 
-export interface ExperienceDocument extends Document {
-  userId: Types.ObjectId;
+export interface WorkExpDetail {
   companyName: string;
   joinLocation: string;
   jobTitle: string;
@@ -10,9 +9,13 @@ export interface ExperienceDocument extends Document {
   leaveDate?: Date | null;
   techStack: string[];
   description?: string | null;
-  fontSize: number;
-  fontFamily: string;
-  fontColor: string;
+  fontSize?: number;
+  fontFamily?: string;
+  fontColor?: string;
+}
+
+export interface ExperienceDocument extends Document, WorkExpDetail {
+  userId: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }

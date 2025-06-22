@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CvTemplateIdEnum } from '../enums/cvTemplateId.enum';
+import { CvTemplateIdEnum, cvTemplateIdEnumType } from '../enums/cvTemplateId.enum';
 
 export const emailSchemaValid = z
   .string()
@@ -8,10 +8,12 @@ export const emailSchemaValid = z
   .min(1)
   .max(255);
 
-export const passwordSchemaValid = z.string().trim().min(8).max(255);
+export const passwordSchemaValid = z.string().trim().min(8).max(255).optional();
 
 export const cvTemplateIdValid = z
-  .enum(Object.values(CvTemplateIdEnum) as [string, ...string[]])
+  .enum(
+    Object.values(CvTemplateIdEnum) as [cvTemplateIdEnumType, ...cvTemplateIdEnumType[]]
+  )
   .optional();
 
 export const registerSchema = z.object({

@@ -8,10 +8,10 @@ export interface UserDetailsInterface {
   state: string;
   pincode: Number;
   dob: Date;
+  summary: string;
   fontSize?: number;
   fontFamily?: string;
   fontColor?: string;
-  summary: string;
 }
 
 export interface UserDetailDocument extends UserDetailsInterface, Document {

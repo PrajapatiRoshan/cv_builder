@@ -6,6 +6,7 @@ import {
   getAllDetailsController,
   getCurrentUserController,
   getProfileImageController,
+  updateDetailController,
   uploadProfileImageController,
 } from '../controller/user.controller';
 
@@ -16,6 +17,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 userRoute.get('/current', getCurrentUserController);
 
 userRoute.delete('/delete', deleteUserController);
+
+userRoute.put('/updateDetails', updateDetailController);
 
 userRoute.post(
   '/uploadProfileImg',

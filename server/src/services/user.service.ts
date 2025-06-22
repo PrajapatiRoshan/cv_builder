@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import UserModel, { UserDocument } from '../models/user.model';
+import UserModel, { UserDocument, UserImgnCV } from '../models/user.model';
 import { BadRequestException, NotFoundException } from '../utils/appError.util';
 import { startSession } from 'mongoose';
 import UserDetailModel, { UserDetailDocument } from '../models/userDetail.model';
@@ -20,9 +20,7 @@ type FullUserData = {
 };
 
 export const getCurrentUserService = async (userId: string) => {
-  const user = await UserModel.findById(userId)
-    .populate('currentWorkspace')
-    .select('-password');
+  const user = await UserModel.findById(userId).select('-password');
   if (!user) {
     throw new BadRequestException('User not found');
   }
@@ -71,6 +69,15 @@ export const deleteUserService = async (userId: string) => {
   }
 };
 
+export const updateUserDetailServices = async (userId: string, body: UserImgnCV) => {
+  const user = await UserModel.findByIdAndUpdate(userId, { $set: body }, { new: true });
+
+  if (!user) {
+    throw new BadRequestException('User not found');
+  }
+  return { user };
+};
+
 export const uploadProfileImageService = async (
   file: Express.Multer.File,
   userId: string
@@ -101,7 +108,7 @@ export const getProfileImageService = async (userId: string): Promise<string | n
 
 export const gelAllDetailsService = async (userId: string): Promise<FullUserData> => {
   const [user, details, educations, experiences, projects, skills] = await Promise.all([
-    UserModel.findById(userId),
+    UserModel.findById(userId).select('-password'),
     UserDetailModel.findOne({ userId }),
     EducationModel.find({ userId }),
     ExperienceModel.find({ userId }),

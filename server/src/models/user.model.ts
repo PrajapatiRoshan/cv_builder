@@ -3,15 +3,15 @@ import { compareValue, hashValue } from '../utils/bcrypt.util';
 import { CvTemplateIdEnum, cvTemplateIdEnumType } from '../enums/cvTemplateId.enum';
 
 export interface UserImgnCV {
-  profilePicture: string | null;
-  cvTemplateId: cvTemplateIdEnumType;
+  name: string;
+  email: string;
+  profilePicture?: string;
+  cvTemplateId?: cvTemplateIdEnumType;
+  password?: string;
 }
 
 export interface UserDocument extends Document, UserImgnCV {
-  name: string;
-  email: string;
-  password?: string;
-  lastLogin: Date | null;
+  lastLogin?: Date;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(value: string): Promise<boolean>;

@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { DegreeListEnum } from '../enums/degree-list.enum';
+import { DegreeListEnum, degreeListEnumType } from '../enums/degree-list.enum';
 
 export const degreeTypeValid = z.enum(
-  Object.values(DegreeListEnum) as [string, ...string[]]
+  Object.values(DegreeListEnum) as [degreeListEnumType, ...degreeListEnumType[]]
 );
 
 export const dateValid = z
@@ -20,5 +20,8 @@ export const educationSchemaValid = z.object({
   startDate: dateValid,
   endDate: dateValid,
   percentage: z.string().trim().min(1).max(255),
+  fontSize: z.number().min(1).max(99).optional(),
+  fontFamily: z.string().optional(),
+  fontColor: z.string().optional(),
 });
 

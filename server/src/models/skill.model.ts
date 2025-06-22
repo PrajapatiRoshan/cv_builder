@@ -1,13 +1,16 @@
 import { Document, model, Schema, Types } from 'mongoose';
 
-export interface SkillDocument extends Document {
-  userId: Types.ObjectId;
+export interface SkillDetail {
   skillName: string;
   skillLevel: number; // (e.g., 1-5)
   experienceYears: number;
-  fontSize: number;
-  fontFamily: string;
-  fontColor: string;
+  fontSize?: number;
+  fontFamily?: string;
+  fontColor?: string;
+}
+
+export interface SkillDocument extends Document, SkillDetail {
+  userId: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }

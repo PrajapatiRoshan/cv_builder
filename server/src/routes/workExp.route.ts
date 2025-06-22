@@ -1,11 +1,17 @@
 import { Router } from 'express';
+import {
+  addWorkExpController,
+  getAllWorkExpController,
+  getDetailWorkExpController,
+  updateWorkExpController,
+} from '../controller/experience.controller';
 
 const workExpRoute = Router();
 
-workExpRoute.post('/addWorkExp');
-workExpRoute.get('/detailWorkExp/:id/get');
-workExpRoute.get('/allWorkExps');
-workExpRoute.put('/updateWorkExp/:id/update');
+workExpRoute.post('/addWorkExp', addWorkExpController);
+workExpRoute.get('/detailWorkExp/:id/get', getDetailWorkExpController);
+workExpRoute.get('/allWorkExps', getAllWorkExpController);
+workExpRoute.put('/updateWorkExp/:id/update', updateWorkExpController);
 
 export default workExpRoute;
 
