@@ -3,5 +3,6 @@ export const CvTemplateIdEnum = {
   TWOCOLFORMATE: 'twocolformate',
 } as const;
 
-export type cvTemplateIdEnumType = keyof typeof CvTemplateIdEnum;
+export type cvTemplateIdEnumType =
+  (typeof CvTemplateIdEnum)[keyof typeof CvTemplateIdEnum];
 

@@ -1,22 +1,28 @@
-import mongoose, { model } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
 import { DegreeListEnum, degreeListEnumType } from '../enums/degree-list.enum';
 
-export interface EducationDocument extends Document {
-  userId: mongoose.Types.ObjectId;
+export interface EducationDetails {
   degreeType: degreeListEnumType;
   institutionName: string;
   fieldOfStudy: string;
   startDate: Date;
   endDate?: Date | null;
-  grade?: string | null;
+  percentage?: string | null;
+  fontSize?: number;
+  fontFamily?: string;
+  fontColor?: string;
+}
+
+export interface EducationDocument extends Document, EducationDetails {
+  userId: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const educationSchema = new mongoose.Schema<EducationDocument>(
+const educationSchema = new Schema<EducationDocument>(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
@@ -43,9 +49,21 @@ const educationSchema = new mongoose.Schema<EducationDocument>(
       type: Date,
       default: null,
     },
-    grade: {
+    percentage: {
       type: String,
       default: null,
+    },
+    fontSize: {
+      type: Number,
+      default: 14,
+    },
+    fontFamily: {
+      type: String,
+      default: 'Arial',
+    },
+    fontColor: {
+      type: String,
+      default: '#808080',
     },
   },
   {
@@ -54,3 +72,6 @@ const educationSchema = new mongoose.Schema<EducationDocument>(
 );
 
 const EducationModel = model<EducationDocument>('Education', educationSchema);
+
+export default EducationModel;
+

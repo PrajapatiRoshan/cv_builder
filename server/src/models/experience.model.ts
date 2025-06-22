@@ -1,23 +1,26 @@
-import mongoose, { model } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
 
 export interface ExperienceDocument extends Document {
-  userId: mongoose.Types.ObjectId;
+  userId: Types.ObjectId;
   companyName: string;
   joinLocation: string;
   jobTitle: string;
-  ctc: string;
+  ctc: number;
   joinDate: Date;
   leaveDate?: Date | null;
   techStack: string[];
   description?: string | null;
+  fontSize: number;
+  fontFamily: string;
+  fontColor: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const experienceSchema = new mongoose.Schema<ExperienceDocument>(
+const experienceSchema = new Schema<ExperienceDocument>(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
@@ -36,9 +39,8 @@ const experienceSchema = new mongoose.Schema<ExperienceDocument>(
       required: true,
       trim: true,
     },
-
     ctc: {
-      type: String,
+      type: Number,
       required: true,
       trim: true,
     },
@@ -61,6 +63,18 @@ const experienceSchema = new mongoose.Schema<ExperienceDocument>(
     description: {
       type: String,
       default: null,
+    },
+    fontSize: {
+      type: Number,
+      default: 14,
+    },
+    fontFamily: {
+      type: String,
+      default: 'Arial',
+    },
+    fontColor: {
+      type: String,
+      default: '#808080',
     },
   },
   {

@@ -1,8 +1,8 @@
-import mongoose, { Document, model, Schema } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
 import { ProviderEnum, ProviderEnumType } from '../enums/accounts-provides.enum';
 
 export interface AccountDocument extends Document {
-  userId: mongoose.Types.ObjectId;
+  userId: Types.ObjectId;
   provider: ProviderEnumType;
   providerId: string;
   refreshToken: string | null;
@@ -47,5 +47,6 @@ const accountSchema = new Schema<AccountDocument>(
 );
 
 const AccountModel = model<AccountDocument>('Account', accountSchema);
+
 export default AccountModel;
 

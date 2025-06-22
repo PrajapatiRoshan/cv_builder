@@ -1,22 +1,25 @@
-import mongoose from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
 
 export interface ProjectDocument extends Document {
-  userId: mongoose.Types.ObjectId;
+  userId: Types.ObjectId;
   projectName: string;
   projectUrl?: string;
   description: string;
   startDate: Date;
   endDate?: Date | null;
   techStack: string[];
+  fontSize: number;
+  fontFamily: string;
+  fontColor: string;
   createdAt: Date;
   updatedAt: Date;
   isActive: boolean;
 }
 
-const projectSchema = new mongoose.Schema<ProjectDocument>(
+const projectSchema = new Schema<ProjectDocument>(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
@@ -54,11 +57,24 @@ const projectSchema = new mongoose.Schema<ProjectDocument>(
       type: Boolean,
       default: true,
     },
+    fontSize: {
+      type: Number,
+      default: 14,
+    },
+    fontFamily: {
+      type: String,
+      default: 'Arial',
+    },
+    fontColor: {
+      type: String,
+      default: '#808080',
+    },
   },
   {
     timestamps: true,
   }
 );
-const ProjectModel = mongoose.model<ProjectDocument>('Project', projectSchema);
+const ProjectModel = model<ProjectDocument>('Project', projectSchema);
+
 export default ProjectModel;
 

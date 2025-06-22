@@ -38,11 +38,9 @@ passport.use(
         const { email, sub: googleId, picture } = profile._json;
         console.log(profile, 'profile');
         console.log(googleId, 'googleId');
-
         if (!googleId) {
           throw new NotFoundException('Google ID (sub) is missing');
         }
-
         const { user } = await loginOrCreateAccountService({
           provider: ProviderEnum.GOOGLE,
           displayName: profile.displayName,
@@ -50,11 +48,8 @@ passport.use(
           picture: picture,
           email: email,
         });
-
         const jwt = signJwtToken({ userId: user._id });
-
         req.jwt = jwt;
-
         done(null, user);
       } catch (error) {
         done(error, false);
@@ -73,7 +68,6 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await verifyUserService({ email, password });
-
         return done(null, user);
       } catch (error: any) {
         return done(error, false, { message: error?.message });

@@ -1,18 +1,21 @@
-import mongoose from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose';
 
 export interface SkillDocument extends Document {
-  userId: mongoose.Types.ObjectId;
+  userId: Types.ObjectId;
   skillName: string;
   skillLevel: number; // (e.g., 1-5)
   experienceYears: number;
+  fontSize: number;
+  fontFamily: string;
+  fontColor: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const skillSchema = new mongoose.Schema<SkillDocument>(
+const skillSchema = new Schema<SkillDocument>(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
@@ -32,11 +35,24 @@ const skillSchema = new mongoose.Schema<SkillDocument>(
       required: true,
       min: 0,
     },
+    fontSize: {
+      type: Number,
+      default: 14,
+    },
+    fontFamily: {
+      type: String,
+      default: 'Arial',
+    },
+    fontColor: {
+      type: String,
+      default: '#808080',
+    },
   },
   {
     timestamps: true,
   }
 );
-const SkillModel = mongoose.model<SkillDocument>('Skill', skillSchema);
+const SkillModel = model<SkillDocument>('Skill', skillSchema);
+
 export default SkillModel;
 

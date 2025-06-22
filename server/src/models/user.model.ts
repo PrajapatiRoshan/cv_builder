@@ -1,13 +1,16 @@
-import mongoose, { Document, model, Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 import { compareValue, hashValue } from '../utils/bcrypt.util';
 import { CvTemplateIdEnum, cvTemplateIdEnumType } from '../enums/cvTemplateId.enum';
 
-export interface UserDocument extends Document {
-  name: string;
+export interface UserImgnCV {
   profilePicture: string | null;
-  email: string;
-  password: string;
   cvTemplateId: cvTemplateIdEnumType;
+}
+
+export interface UserDocument extends Document, UserImgnCV {
+  name: string;
+  email: string;
+  password?: string;
   lastLogin: Date | null;
   createdAt: Date;
   updatedAt: Date;
@@ -41,7 +44,7 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       enum: Object.values(CvTemplateIdEnum),
       required: true,
-      default: null,
+      default: CvTemplateIdEnum.ONEPAGEFORMATE,
     },
     lastLogin: {
       type: Date,
@@ -73,5 +76,6 @@ userSchema.methods.comparePassword = async function (value: string) {
 };
 
 const UserModel = model<UserDocument>('User', userSchema);
+
 export default UserModel;
 
