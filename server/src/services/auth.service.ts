@@ -11,7 +11,7 @@ import { ProviderEnum } from '../enums/accounts-provides.enum';
 export const registerUserService = async (body: {
   email: string;
   name: string;
-  password: string;
+  password?: string;
 }) => {
   const { email, name, password } = body;
   const session = await mongoose.startSession();
