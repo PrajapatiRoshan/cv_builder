@@ -1,0 +1,27 @@
+{
+  "onePageFormate": {
+    "name": "onePageFormate",
+    "img": "https://assets.zety.com/blobimages/zty/sem/images/resume-camelot-SRZ3.svg"
+  },
+  "twocolformate": {
+    "name": "twocolformate",
+    "img": "https://assets.zety.com/blobimages/zty/sem/images/resume-slate-blue-SRZ1.svg"
+  },
+  "template1": {
+    "name": "template1",
+    "img": "https://assets.zety.com/blobimages/zty/sem/images/resume-steel-blue-SRZ9.svg"
+  },
+  "template2": {
+    "name": "template2",
+    "img": "https://assets.zety.com/blobimages/zty/sem/images/resume-light-wisteria-SRZ4.svg"
+  },
+  "template3": {
+    "name": "template3",
+    "img": "https://assets.zety.com/blobimages/zty/sem/images/resume-light-wisteria-SRZ4.svg"
+  },
+  "template4": {
+    "name": "template4",
+    "img": "https://assets.zety.com/blobimages/zty/sem/images/resume-camelot-SRZ3.svg"
+  }
+}
+

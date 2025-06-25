@@ -1,0 +1,44 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #cv-content,
+  #cv-content * {
+    visibility: visible;
+  }
+
+  #cv-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .cv-section {
+    page-break-inside: avoid;
+  }
+}
+

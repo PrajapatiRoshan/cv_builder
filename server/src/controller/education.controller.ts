@@ -51,7 +51,7 @@ export const updateEducationController = asyncHandler(
     const body = educationSchemaValid.parse({ ...req?.body });
     const { education } = await updateEducationService(eduId, body);
     return res.status(HTTPSTATUS.OK).json({
-      message: 'Education Added successfully',
+      message: 'Education updated successfully',
       education,
     });
   }

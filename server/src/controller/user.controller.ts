@@ -10,7 +10,7 @@ import {
   uploadProfileImageService,
 } from '../services/user.service';
 import { CvTemplateIdEnum } from '../enums/cvTemplateId.enum';
-import { registerSchema } from '../validations/auth.validation';
+import { updateSchema } from '../validations/auth.validation';
 
 export const getCurrentUserController = asyncHandler(
   async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ export const deleteUserController = asyncHandler(async (req: Request, res: Respo
 export const updateDetailController = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.user?._id;
-    const body = registerSchema.parse({ ...req.body });
+    const body = updateSchema.parse({ ...req.body });
     const { user } = await updateUserDetailServices(userId, body);
     return res.status(HTTPSTATUS.OK).json({
       message: 'User fetched successfully',

@@ -4,7 +4,7 @@ import { CvTemplateIdEnum, cvTemplateIdEnumType } from '../enums/cvTemplateId.en
 
 export interface UserImgnCV {
   name: string;
-  email: string;
+  email?: string;
   profilePicture?: string;
   cvTemplateId?: cvTemplateIdEnumType;
   password?: string;
@@ -44,7 +44,7 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       enum: Object.values(CvTemplateIdEnum),
       required: true,
-      default: CvTemplateIdEnum.ONEPAGEFORMATE,
+      default: null,
     },
     lastLogin: {
       type: Date,
