@@ -15,9 +15,10 @@ import useGetAllTemplateHook from '@/hooks/user/use-getAllTemplate';
 import templateJson from '@/assets/labStructure.json';
 import { useMutation } from '@tanstack/react-query';
 import { updateUserMutationFn } from '@/libs/api';
-import ToastMessage, { ToastMessageHandle } from '@/components/ui/ToastMessage.com';
+import ToastMessage from '@/components/ui/ToastMessage.com';
 import { useNavigate } from 'react-router';
 import { EDITOR_ROUTES } from '@/routes/common/routesPath';
+import { ToastMessageHandle } from '@/types/interface';
 const HoverCard = lazy(() => import('@/components/ui/HoverCard.com'));
 
 const ColumnGrid = styled(Box)(({ theme }) => ({
