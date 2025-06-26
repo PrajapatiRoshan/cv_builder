@@ -1,5 +1,4 @@
 import { addWorkExpMutationFn, updateWorkExpMutationFn } from '@/libs/api';
-import { initialExperience } from '@/pages/ediotr/Experience.page';
 import ToastMessage, { ToastMessageHandle } from '../ui/ToastMessage.com';
 import { useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
@@ -11,18 +10,8 @@ import { workExperienceSchemaValidation } from '@/validations/editor.validation'
 import { Box, Button, Stack, TextField } from '@mui/material';
 import EditorFontSettings from '../ui/EditorFontSettings';
 import { LoadingButton } from '@mui/lab';
-
-interface WorkExperienceFormProps {
-  id?: string;
-  initialValues: typeof initialExperience;
-  setWorkForms: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-      }[]
-    >
-  >;
-}
+import { useOutletContext } from 'react-router';
+import { WorkExperienceFormProps } from '@/types/interface';
 
 const ExperienceForm: React.FC<WorkExperienceFormProps> = ({
   id,
@@ -37,6 +26,7 @@ const ExperienceForm: React.FC<WorkExperienceFormProps> = ({
     mutationFn: ({ id, data }: { id: string; data: WorkExpType }) =>
       updateWorkExpMutationFn(id, data),
   });
+  const { refetchUserDetails } = useOutletContext<{ refetchUserDetails: () => void }>();
 
   const submitHandler = (values: any) => {
     if (addWorkMutation.isPending || updateWorkMutation.isPending) return;
@@ -55,6 +45,7 @@ const ExperienceForm: React.FC<WorkExperienceFormProps> = ({
         onSuccess: () => {
           toastRef.current?.showToast('Work experience added!', 'success');
           refetch();
+          refetchUserDetails();
         },
         onError: () => {
           toastRef.current?.showToast('Error occurred while adding.', 'error');

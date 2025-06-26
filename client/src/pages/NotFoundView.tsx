@@ -16,7 +16,7 @@ function NotFoundView() {
   return (
     <Container
       sx={{
-        minHeight: '100dvh', // full height of viewport
+        minHeight: '100dvh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

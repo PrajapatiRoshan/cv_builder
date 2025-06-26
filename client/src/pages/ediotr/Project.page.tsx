@@ -3,18 +3,7 @@ import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import useGetAllProject from '@/hooks/projects/use-get-Allproject';
 import ProjectForm from '@/components/forms/ProjectForm';
-
-export const initialProject = {
-  projectName: '',
-  projectUrl: '',
-  description: '',
-  startDate: new Date(),
-  endDate: new Date(),
-  techStack: '',
-  fontSize: 14,
-  fontFamily: 'Arial',
-  fontColor: '#333333',
-};
+import { initialProject } from '@/constant/enums.const';
 
 const ProjectPage = () => {
   const { data, isLoading } = useGetAllProject();

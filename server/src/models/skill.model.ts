@@ -2,7 +2,7 @@ import { Document, model, Schema, Types } from 'mongoose';
 
 export interface SkillDetail {
   skillName: string;
-  skillLevel: number; // (e.g., 1-5)
+  skillLevel: number;
   experienceYears: number;
   fontSize?: number;
   fontFamily?: string;

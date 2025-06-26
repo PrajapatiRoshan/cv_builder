@@ -12,7 +12,9 @@ export const googleLoginCallback = asyncHandler(async (req: Request, res: Respon
   if (!jwt) {
     return res.redirect(`${config.FRONTEND_GOOGLE_CALLBACK_URL}?status=failure`);
   }
-  return res.redirect(`${config.FRONTEND_GOOGLE_CALLBACK_URL}?status=success`);
+  return res.redirect(
+    `${config.FRONTEND_GOOGLE_CALLBACK_URL}?status=success&access_token=${jwt}`
+  );
 });
 
 export const registerUserController = asyncHandler(

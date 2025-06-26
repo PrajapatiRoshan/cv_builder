@@ -1,5 +1,3 @@
-// components/forms/EducationForm.tsx
-
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { LoadingButton } from '@mui/lab';
@@ -12,19 +10,8 @@ import ToastMessage, { ToastMessageHandle } from '@/components/ui/ToastMessage.c
 import { useRef } from 'react';
 import { EducationType } from '@/types/api.type';
 import useGetEducationById from '@/hooks/educations/ue-get-educationsById';
-import { initialEducation } from '@/pages/ediotr/Education.page';
-
-interface EducationFormProps {
-  id?: string;
-  initialValues: typeof initialEducation;
-  setEducationForms: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-      }[]
-    >
-  >;
-}
+import { useOutletContext } from 'react-router';
+import { EducationFormProps } from '@/types/interface';
 
 const EducationForm: React.FC<EducationFormProps> = ({
   id,
@@ -39,6 +26,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
     mutationFn: ({ id, data }: { id: string; data: EducationType }) =>
       updateEducationMutationFn(id, data),
   });
+  const { refetchUserDetails } = useOutletContext<{ refetchUserDetails: () => void }>();
 
   const submitHandler = (values: any) => {
     if (addMutation.isPending || updateMutation.isPending) return;
@@ -56,6 +44,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
         onSuccess: (data) => {
           toastRef.current?.showToast(data.message || 'Education Added!', 'success');
           refetch();
+          refetchUserDetails();
         },
         onError: (err) => {
           toastRef.current?.showToast(err?.message || 'Something went wrong!', 'error');

@@ -3,15 +3,7 @@ import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import SkillsForm from '@/components/forms/SkillForm';
 import useGetAllSkills from '@/hooks/skill/use-get-allSkills';
-
-export const initialSkill = {
-  skillName: '',
-  skillLevel: 1,
-  experienceYears: 0,
-  fontSize: 14,
-  fontFamily: 'Arial',
-  fontColor: '#333333',
-};
+import { initialSkill } from '@/constant/enums.const';
 
 const SkillsPage = () => {
   const { data, isLoading } = useGetAllSkills();
@@ -28,7 +20,6 @@ const SkillsPage = () => {
   }, [isLoading, data]);
 
   const handleAddForm = () => {
-    if (data?.skills?.length) return;
     setSkillForm((prev) => [...prev, { id: Date.now() }]);
   };
 

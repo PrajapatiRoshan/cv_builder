@@ -34,18 +34,22 @@ const CVSection = ({
     <SectionWrapper>
       <Paper
         sx={{
-          p: 4,
+          border: '1px solid #ccc',
+          borderRadius: 2,
+          p: { xs: 2, sm: 4 },
           width: '100%',
+          borderColor: 'divider',
           minHeight: '70vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
+          // border: '2px solid black',
         }}
       >
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           {title}
         </Typography>
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={{ mb: 4, mt: 2 }} />
         <Stack spacing={2}>
           {items.map((item) => (
             <Box key={item._id}>{renderItem(item)}</Box>

@@ -4,31 +4,20 @@ import { useRef } from 'react';
 import { LoadingButton } from '@mui/lab';
 import { userDetailSchemaValidation } from '@/validations/editor.validation';
 import EditorFontSettings from '@/components/ui/EditorFontSettings';
-import { TABLIST } from '@/components/ui/TabSideBar';
+
 import { useMutation } from '@tanstack/react-query';
 import { createUSerDetailMutationFn, updateUserDetailMutationFn } from '@/libs/api';
-import ToastMessage, { ToastMessageHandle } from '@/components/ui/ToastMessage.com';
+import ToastMessage from '@/components/ui/ToastMessage.com';
 import useGetUserDetailQuery from '@/hooks/userdetail/use-get-userDetail';
 import { formatDateToInput, formateDateToISO } from '@/utility/helper';
-
-const initialValues = {
-  address: '',
-  countryCode: 91,
-  phone: '',
-  city: '',
-  state: '',
-  pincode: '',
-  dob: new Date(),
-  fontSize: 16,
-  fontFamily: 'Arial',
-  fontColor: '',
-  summary: '',
-};
+import { useOutletContext } from 'react-router';
+import { ToastMessageHandle } from '@/types/interface';
+import { initialValues, TABLIST } from '@/constant/enums.const';
 
 const UserDetailPage = () => {
   const toastRef = useRef<ToastMessageHandle>(null);
   const { data, isLoading, refetch } = useGetUserDetailQuery({});
-
+  const { refetchUserDetails } = useOutletContext<{ refetchUserDetails: () => void }>();
   const userData = data?.detail;
   const createMutation = useMutation({ mutationFn: createUSerDetailMutationFn });
   const updateMutation = useMutation({ mutationFn: updateUserDetailMutationFn });
@@ -51,6 +40,7 @@ const UserDetailPage = () => {
       onSuccess: (data) => {
         toastRef.current?.showToast(data.message || 'Success!', 'success');
         refetch();
+        refetchUserDetails();
       },
       onError: (error) => {
         toastRef.current?.showToast(error?.message || 'Something went wrong!', 'error');
@@ -84,7 +74,6 @@ const UserDetailPage = () => {
 
         <form onSubmit={formik.handleSubmit}>
           <Box display="grid" gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr' }} gap={3}>
-            {/* Column 1 */}
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
                 label="Phone"
@@ -117,7 +106,6 @@ const UserDetailPage = () => {
               />
             </Box>
 
-            {/* Column 2 */}
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
                 label="Date of Birth"
@@ -173,7 +161,6 @@ const UserDetailPage = () => {
             }}
           />
 
-          {/* Action Buttons */}
           <Stack direction="row" spacing={2} mt={4} justifyContent="center">
             <Button
               type="reset"

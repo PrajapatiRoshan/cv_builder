@@ -3,18 +3,7 @@ import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import EducationForm from '@/components/forms/EducationForm';
 import useGetAllEducations from '@/hooks/educations/use-get-AllEducations';
-
-export const initialEducation = {
-  degreeType: '',
-  institutionName: '',
-  fieldOfStudy: '',
-  startDate: new Date(),
-  endDate: new Date(),
-  percentage: '',
-  fontSize: 14,
-  fontFamily: 'Arial',
-  fontColor: '#333333',
-};
+import { initialEducation } from '@/constant/enums.const';
 
 const EducationDetailsPage = () => {
   const { data, isLoading } = useGetAllEducations();

@@ -3,20 +3,7 @@ import useGetAllWorkExperience from '@/hooks/experience/use-get-AllExperience';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-
-export const initialExperience = {
-  companyName: '',
-  joinLocation: '',
-  jobTitle: '',
-  ctc: '',
-  joinDate: new Date(),
-  leaveDate: new Date(),
-  techStack: '',
-  description: '',
-  fontSize: 14,
-  fontFamily: 'Arial',
-  fontColor: '#333333',
-};
+import { initialExperience } from '@/constant/enums.const';
 
 const ExperiencePage = () => {
   const { data, isLoading } = useGetAllWorkExperience();

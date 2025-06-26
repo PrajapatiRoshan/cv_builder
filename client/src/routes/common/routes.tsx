@@ -15,11 +15,11 @@ export const authenticationRoutePaths = [
   { path: AUTH_ROUTES.SIGN_IN, element: <SignIn /> },
   { path: AUTH_ROUTES.SIGN_UP, element: <SignUp /> },
   { path: AUTH_ROUTES.GOOGLE_OAUTH_CALLBACK, element: <GoogleOAuth /> },
-];
+] as const;
 
 export const dashBoardRoutePaths = [
   { path: PROTECTED_ROUTES.USER, element: <DashboardPage /> },
-];
+] as const;
 
 export const editorRoutePaths = [
   { path: EDITOR_ROUTES.USERDETAIL, element: <UserDetailPage /> },
@@ -27,5 +27,5 @@ export const editorRoutePaths = [
   { path: EDITOR_ROUTES.EXPERIENCE, element: <ExperiencePage /> },
   { path: EDITOR_ROUTES.SKILLS, element: <SkillsPage /> },
   { path: EDITOR_ROUTES.PROJECT, element: <ProjectPage /> },
-];
+] as const;
 

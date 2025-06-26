@@ -1,15 +1,6 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 import useAuth from '@/hooks/auth/use-auth';
-import { UserType } from '@/types/api.type';
-
-// Define the context shape
-type AuthContextType = {
-  user?: UserType;
-  error: any;
-  isLoading: boolean;
-  isFetching: boolean;
-  refetchAuth: () => void;
-};
+import { AuthContextType } from '@/types/interface';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -37,13 +28,5 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuthContext = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useCurrentUserContext must be used within a AuthProvider');
-  }
-  return context;
 };
 

@@ -1,4 +1,5 @@
 import TabSideBar from '@/components/ui/TabSideBar';
+import useUnSavedDialog from '@/hooks/useUnSavedDialog';
 import useGetAllUSerDetails from '@/hooks/user/use-get-AllDetails';
 import { PROTECTED_ROUTES } from '@/routes/common/routesPath';
 import { Box, Button, CircularProgress, useMediaQuery, useTheme } from '@mui/material';
@@ -11,12 +12,14 @@ const EditorLayout = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const { data, isLoading } = useGetAllUSerDetails();
+  const { data, isLoading, refetch } = useGetAllUSerDetails();
 
   const [previewWidth, setPreviewWidth] = useState(400);
   const [isDragging, setIsDragging] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useUnSavedDialog(true);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -71,7 +74,6 @@ const EditorLayout = () => {
           alignItems: 'center',
         }}
       >
-        {/* Back button fixed at the top-left corner inside sidebar */}
         <Button
           variant="outlined"
           // onClick={() => window.history.back()}
@@ -88,7 +90,6 @@ const EditorLayout = () => {
           Back
         </Button>
 
-        {/* Push the TabSideBar down a bit, so it doesn't overlap with the button */}
         <Box sx={{ marginTop: '30vh', width: '100%' }}>
           <TabSideBar />
         </Box>
@@ -96,7 +97,7 @@ const EditorLayout = () => {
 
       <Box ref={containerRef} sx={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         <Box sx={{ flex: 1, p: 3, overflowY: 'auto' }}>
-          <Outlet />
+          <Outlet context={{ refetchUserDetails: refetch }} />
         </Box>
 
         {!isMobile && (

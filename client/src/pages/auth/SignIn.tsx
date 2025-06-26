@@ -12,9 +12,10 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { setAccessToken, setUser } from '@/store/auth-store';
 import { AUTH_ROUTES, PROTECTED_ROUTES } from '@/routes/common/routesPath';
 import { loginSchemaValidate } from '@/validations/auth.validation';
-import ToastMessage, { ToastMessageHandle } from '@/components/ui/ToastMessage.com';
+import ToastMessage from '@/components/ui/ToastMessage.com';
+import GoogleOauthButton from '@/components/auth/google-auth.botton';
+import { ToastMessageHandle } from '@/types/interface';
 
-// ----------------------------------------------------------------------
 const initialValues = {
   email: '',
   password: '',
@@ -74,6 +75,7 @@ const SignInView = () => {
         sx={{ mb: 4 }}
       >
         <Typography variant="h4">Sign in</Typography>
+        <GoogleOauthButton label="Login" />
         <Typography variant="body2" color="text.secondary">
           Don&apos;t have an account?
           <Link to={AUTH_ROUTES.SIGN_UP} style={{ marginLeft: 8 }} color="inherit">

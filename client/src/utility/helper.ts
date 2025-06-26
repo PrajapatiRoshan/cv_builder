@@ -1,5 +1,12 @@
+import { fontType } from '@/types/api.type';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+
+export const getTypographyStyles = (item: fontType) => ({
+  fontSize: item.fontSize || '1rem',
+  fontFamily: item.fontFamily || 'Roboto, sans-serif',
+  color: item.fontColor || '#000',
+});
 
 export const formatDateToInput = (isoString: string | Date) => {
   const date = new Date(isoString);
@@ -12,15 +19,13 @@ export const downloadPDF = async () => {
   const cv = document.getElementById('cv-content');
   if (!cv) return;
 
-  // Store original state
   const origOverflow = cv.style.overflow;
   const origHeight = cv.style.height;
 
-  // Make it fully expand to its content
   cv.style.overflow = 'visible';
   cv.style.height = 'auto';
 
-  await new Promise((r) => setTimeout(r, 100)); // wait for layout
+  await new Promise((r) => setTimeout(r, 100));
 
   const canvas = await html2canvas(cv, { scale: 2, useCORS: true } as any);
   const imgData = canvas.toDataURL('image/png');
@@ -43,7 +48,6 @@ export const downloadPDF = async () => {
 
   pdf.save('cv-preview.pdf');
 
-  // Restore container styles
   cv.style.overflow = origOverflow;
   cv.style.height = origHeight;
 };
@@ -67,34 +71,4 @@ export const handlePrint = () => {
     }
   }, 500);
 };
-
-// export const handlePayment = async () => {
-//   const res = await fetch('/api/create-order', {
-//     method: 'POST',
-//   });
-//   const data = await res.json();
-
-//   const options = {
-//     key: 'YOUR_RAZORPAY_KEY_ID',
-//     amount: data.amount,
-//     currency: 'INR',
-//     name: 'Resume Builder Pro',
-//     description: 'Download Resume',
-//     order_id: data.id,
-//     handler: function (response: any) {
-//       // Payment successful, now print
-//       handlePrint();
-//     },
-//     prefill: {
-//       name: 'Roshan Ji',
-//       email: 'roshan.user@gmail.com',
-//     },
-//     theme: {
-//       color: '#3399cc',
-//     },
-//   };
-
-//   const razor = new (window as any).Razorpay(options);
-//   razor.open();
-// };
 

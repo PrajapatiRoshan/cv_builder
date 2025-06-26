@@ -1,6 +1,7 @@
-import ToastMessage, { ToastMessageHandle } from '@/components/ui/ToastMessage.com';
+import ToastMessage from '@/components/ui/ToastMessage.com';
 import { registerMutationFn } from '@/libs/api';
 import { AUTH_ROUTES } from '@/routes/common/routesPath';
+import { ToastMessageHandle } from '@/types/interface';
 import { signUpSchemaValidate } from '@/validations/auth.validation';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';

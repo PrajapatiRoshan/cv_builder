@@ -8,7 +8,6 @@ import {
   Typography,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-// import ColumnGrid from '@/components/ui/Column.grid.com';
 import { styled } from '@mui/system';
 import useAuth from '@/hooks/auth/use-auth';
 import { lazy, Suspense, useRef } from 'react';
@@ -83,8 +82,12 @@ const DashboardPage = () => {
     <>
       <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
         <Stack alignItems="center" spacing={2} mb={4}>
-          <Avatar sx={{ width: 100, height: 100 }}>
-            {userName.charAt(0).toUpperCase() || <PersonIcon />}
+          <Avatar
+            sx={{ width: 100, height: 100 }}
+            src={data?.user?.profilePicture || undefined}
+          >
+            {!data?.user?.profilePicture &&
+              (userName?.charAt(0).toUpperCase() || <PersonIcon />)}
           </Avatar>
           <Typography variant="h4">{userName}</Typography>
           <Typography variant="subtitle1" color="text.secondary">

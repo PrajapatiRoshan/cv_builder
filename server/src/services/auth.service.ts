@@ -36,7 +36,6 @@ export const registerUserService = async (body: {
     });
     await account.save({ session });
 
-    // user.currentWorkspace = workspace._id as mongoose.Types.ObjectId;
     await user.save({ session });
 
     await session.commitTransaction();
@@ -78,7 +77,6 @@ export const loginOrCreateAccountService = async (data: {
       });
       await account.save({ session });
 
-      //   user.cvTemplateId = workspace._id as mongoose.Types.ObjectId;
       await user.save({ session });
     }
 

@@ -1,9 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState, useCallback } from 'react';
 import { Snackbar, Alert, AlertColor } from '@mui/material';
-
-export type ToastMessageHandle = {
-  showToast: (message: string, severity?: AlertColor) => void;
-};
+import { ToastMessageHandle } from '@/types/interface';
 
 const ToastMessage = forwardRef<ToastMessageHandle>((_props, ref) => {
   const [toastOpen, setToastOpen] = useState(false);

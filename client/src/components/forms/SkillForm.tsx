@@ -10,24 +10,14 @@ import { skillSchemaValidation } from '@/validations/editor.validation';
 import { addSkillMutationFn, updateSkillMutationFn } from '@/libs/api';
 import { SkillType } from '@/types/api.type';
 import useGetSkillById from '@/hooks/skill/use-get-skillById';
-
-interface SkillsFormProps {
-  id?: string;
-  initialValues: typeof initialSkill;
-  setSkillForm: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-      }[]
-    >
-  >;
-}
+import { useOutletContext } from 'react-router';
+import { SkillsFormProps } from '@/types/interface';
 
 const SkillsForm: React.FC<SkillsFormProps> = ({ id, initialValues, setSkillForm }) => {
   const toastRef = useRef<ToastMessageHandle>(null);
   const { data, isLoading, refetch } = useGetSkillById({ id });
   const skillData = data?.skill;
-
+  const { refetchUserDetails } = useOutletContext<{ refetchUserDetails: () => void }>();
   const addSkillMutation = useMutation({ mutationFn: addSkillMutationFn });
   const updateMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: SkillType }) =>
@@ -46,6 +36,7 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ id, initialValues, setSkillForm
         onSuccess: () => {
           toastRef.current?.showToast('Skill added!', 'success');
           refetch();
+          refetchUserDetails();
         },
         onError: () => {
           toastRef.current?.showToast('Error occurred while adding skill.', 'error');

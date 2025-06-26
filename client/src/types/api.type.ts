@@ -24,7 +24,6 @@ export type fontType = {
   fontColor?: string;
 };
 
-// USER TYPE
 export type UserType = {
   _id: string;
   name: string;

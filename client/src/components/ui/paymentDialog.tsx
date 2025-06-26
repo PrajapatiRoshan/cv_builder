@@ -8,7 +8,6 @@ const DummyPayment = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handlePay = () => {
-    // Simulate payment success after 1 second delay
     setTimeout(() => {
       setOpen(false);
       handlePrint();

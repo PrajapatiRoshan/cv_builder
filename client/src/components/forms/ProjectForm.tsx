@@ -11,18 +11,8 @@ import { projectSchemaValidation } from '@/validations/editor.validation';
 import { addProjectMutationFn, updateProjectMutationFn } from '@/libs/api';
 import { ProjectType } from '@/types/api.type';
 import useGetProjectById from '@/hooks/projects/use-get-projectById';
-
-interface ProjectFormProps {
-  id?: string;
-  initialValues: typeof initialProject;
-  setProjectForm: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: number;
-      }[]
-    >
-  >;
-}
+import { useOutletContext } from 'react-router';
+import { ProjectFormProps } from '@/types/interface';
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
   id,
@@ -32,7 +22,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
   const toastRef = useRef<ToastMessageHandle>(null);
   const { data, isLoading, refetch } = useGetProjectById({ id });
   const projectData = data?.project;
-
+  const { refetchUserDetails } = useOutletContext<{ refetchUserDetails: () => void }>();
   const addMutation = useMutation({ mutationFn: addProjectMutationFn });
   const updateMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: ProjectType }) =>
@@ -56,6 +46,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({
         onSuccess: () => {
           toastRef.current?.showToast('Project added!', 'success');
           refetch();
+          refetchUserDetails();
         },
         onError: () => {
           toastRef.current?.showToast('Error occurred while adding project.', 'error');

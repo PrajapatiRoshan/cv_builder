@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Box, MenuItem, TextField, Typography } from '@mui/material';
-
-const fontOptions = ['Arial', 'Roboto', 'Helvetica', 'Times New Roman', 'Courier New'];
-
-interface EditorFontSettingsProps {
-  fSize?: number;
-  fFamily?: string;
-  fColor?: string;
-}
-
-interface EditorFontSettingsComponentProps extends EditorFontSettingsProps {
-  onChange: (data: EditorFontSettingsProps) => void;
-}
+import {
+  EditorFontSettingsComponentProps,
+  EditorFontSettingsProps,
+} from '@/types/interface';
+import { fontOptions } from '@/constant/enums.const';
 
 const EditorFontSettings = ({
   fSize = 14,

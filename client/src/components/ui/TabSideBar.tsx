@@ -1,14 +1,6 @@
-import { EDITOR_ROUTES } from '@/routes/common/routesPath';
+import { TABLIST } from '@/constant/enums.const';
 import { Box, Button, Stack } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-export const TABLIST = [
-  { label: 'Basic Details', path: EDITOR_ROUTES.USERDETAIL },
-  { label: 'Education', path: EDITOR_ROUTES.EDUCATION },
-  { label: 'Experience', path: EDITOR_ROUTES.EXPERIENCE },
-  { label: 'Skills', path: EDITOR_ROUTES.SKILLS },
-  { label: 'Projects', path: EDITOR_ROUTES.PROJECT },
-] as const;
 
 const TabSideBar = () => {
   const navigate = useNavigate();

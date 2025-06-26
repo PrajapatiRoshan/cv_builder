@@ -13,11 +13,17 @@ createRoot(document.getElementById('root')!).render(
     <QueryProvider>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          {/* <Router /> */}
           <AppRoutes />
         </Provider>
       </ThemeProvider>
     </QueryProvider>
   </StrictMode>
 );
+
+requestIdleCallback(() => {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    preloader.remove();
+  }
+});
 

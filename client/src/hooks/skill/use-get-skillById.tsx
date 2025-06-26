@@ -1,8 +1,8 @@
 import { getSkillByIdQueryFn } from '@/libs/api';
 import { useQuery } from '@tanstack/react-query';
 
-const useGetSkillById = ({ id }: { id?: string }) => {
-  return useQuery({
+const useGetSkillById = ({ id }: { id?: string }) =>
+  useQuery({
     queryKey: ['skillId', id],
     queryFn: ({ queryKey }) => {
       const [, skillId] = queryKey;
@@ -13,7 +13,6 @@ const useGetSkillById = ({ id }: { id?: string }) => {
     staleTime: 1000 * 60,
     retry: 1,
   });
-};
 
 export default useGetSkillById;
 
