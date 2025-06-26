@@ -1,5 +1,5 @@
-import { EducationType, fontType } from '@/types/api.type';
-import { Paper, Grid, Typography, Box, LinearProgress, useTheme } from '@mui/material';
+import { EducationType } from '@/types/api.type';
+import { Paper, Typography, Box, LinearProgress } from '@mui/material';
 
 const EducationSection = ({ edu }: { edu: EducationType }) => {
   return (
