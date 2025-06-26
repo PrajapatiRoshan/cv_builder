@@ -2,17 +2,18 @@ import { Box, Button, Stack, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { LoadingButton } from '@mui/lab';
 import { useRef } from 'react';
-import ToastMessage, { ToastMessageHandle } from '../ui/ToastMessage.com';
+import ToastMessage from '../ui/ToastMessage.com';
 import EditorFontSettings from '../ui/EditorFontSettings';
 import { useMutation } from '@tanstack/react-query';
 import { formatDateToInput, formateDateToISO } from '@/utility/helper';
-import { initialProject } from '@/pages/ediotr/Project.page';
+
 import { projectSchemaValidation } from '@/validations/editor.validation';
 import { addProjectMutationFn, updateProjectMutationFn } from '@/libs/api';
 import { ProjectType } from '@/types/api.type';
 import useGetProjectById from '@/hooks/projects/use-get-projectById';
 import { useOutletContext } from 'react-router';
-import { ProjectFormProps } from '@/types/interface';
+import { ProjectFormProps, ToastMessageHandle } from '@/types/interface';
+import { initialProject } from '@/constant/enums.const';
 
 const ProjectForm: React.FC<ProjectFormProps> = ({
   id,

@@ -2,8 +2,7 @@ import { Box, Button, Stack, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { LoadingButton } from '@mui/lab';
 import { useRef } from 'react';
-import { initialSkill } from '@/pages/ediotr/Skills.page';
-import ToastMessage, { ToastMessageHandle } from '../ui/ToastMessage.com';
+import ToastMessage from '../ui/ToastMessage.com';
 import EditorFontSettings from '../ui/EditorFontSettings';
 import { useMutation } from '@tanstack/react-query';
 import { skillSchemaValidation } from '@/validations/editor.validation';
@@ -11,7 +10,8 @@ import { addSkillMutationFn, updateSkillMutationFn } from '@/libs/api';
 import { SkillType } from '@/types/api.type';
 import useGetSkillById from '@/hooks/skill/use-get-skillById';
 import { useOutletContext } from 'react-router';
-import { SkillsFormProps } from '@/types/interface';
+import { SkillsFormProps, ToastMessageHandle } from '@/types/interface';
+import { initialSkill } from '@/constant/enums.const';
 
 const SkillsForm: React.FC<SkillsFormProps> = ({ id, initialValues, setSkillForm }) => {
   const toastRef = useRef<ToastMessageHandle>(null);

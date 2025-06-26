@@ -6,12 +6,12 @@ import { formatDateToInput, formateDateToISO } from '@/utility/helper';
 import { educationSchemaValidation } from '@/validations/editor.validation';
 import { useMutation } from '@tanstack/react-query';
 import { addEducationMutationFn, updateEducationMutationFn } from '@/libs/api';
-import ToastMessage, { ToastMessageHandle } from '@/components/ui/ToastMessage.com';
+import ToastMessage from '@/components/ui/ToastMessage.com';
 import { useRef } from 'react';
 import { EducationType } from '@/types/api.type';
 import useGetEducationById from '@/hooks/educations/ue-get-educationsById';
 import { useOutletContext } from 'react-router';
-import { EducationFormProps } from '@/types/interface';
+import { EducationFormProps, ToastMessageHandle } from '@/types/interface';
 
 const EducationForm: React.FC<EducationFormProps> = ({
   id,

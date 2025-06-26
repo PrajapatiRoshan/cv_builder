@@ -1,5 +1,5 @@
 import { addWorkExpMutationFn, updateWorkExpMutationFn } from '@/libs/api';
-import ToastMessage, { ToastMessageHandle } from '../ui/ToastMessage.com';
+import ToastMessage from '../ui/ToastMessage.com';
 import { useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { WorkExpType } from '@/types/api.type';
@@ -11,7 +11,7 @@ import { Box, Button, Stack, TextField } from '@mui/material';
 import EditorFontSettings from '../ui/EditorFontSettings';
 import { LoadingButton } from '@mui/lab';
 import { useOutletContext } from 'react-router';
-import { WorkExperienceFormProps } from '@/types/interface';
+import { ToastMessageHandle, WorkExperienceFormProps } from '@/types/interface';
 
 const ExperienceForm: React.FC<WorkExperienceFormProps> = ({
   id,

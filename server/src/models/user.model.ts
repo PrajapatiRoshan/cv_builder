@@ -43,7 +43,6 @@ const userSchema = new Schema<UserDocument>(
     cvTemplateId: {
       type: String,
       enum: Object.values(CvTemplateIdEnum),
-      required: true,
       default: null,
     },
     lastLogin: {
