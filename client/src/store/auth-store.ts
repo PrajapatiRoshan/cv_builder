@@ -20,8 +20,6 @@ const authSlice = createSlice({
       localStorage.setItem('accessToken', action.payload);
     },
     setUser: (state, action: PayloadAction<UserType>) => {
-      console.log(action.payload);
-
       state.user = action.payload;
     },
     clearAccessToken: (state) => {

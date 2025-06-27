@@ -38,7 +38,7 @@ export const updateDetailController = asyncHandler(
     const body = updateSchema.parse({ ...req.body });
     const { user } = await updateUserDetailServices(userId, body);
     return res.status(HTTPSTATUS.OK).json({
-      message: 'User fetched successfully',
+      message: 'User update successfully',
       user,
     });
   }

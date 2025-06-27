@@ -7,6 +7,7 @@ import {
   SkillType,
   WorkExpType,
 } from '@/types/api.type';
+import theme from '@/utility/theme';
 
 const SectionWrapper = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
@@ -33,17 +34,35 @@ const CVSection = ({
   return (
     <SectionWrapper>
       <Paper
+        // sx={{
+        //   border: '1px solid #ccc',
+        //   borderRadius: 2,
+        //   p: { xs: 2, sm: 4 },
+        //   width: '100%',
+        //   borderColor: 'divider',
+        //   minHeight: '70vh',
+        //   display: 'flex',
+        //   flexDirection: 'column',
+        //   justifyContent: 'flex-start',
+        //   // border: '2px solid black',
+        // }}
         sx={{
+          width: '100%',
+          minHeight: '70vh',
+          p: { xs: 2, sm: 4 },
           border: '1px solid #ccc',
           borderRadius: 2,
-          p: { xs: 2, sm: 4 },
-          width: '100%',
           borderColor: 'divider',
-          minHeight: '70vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          // border: '2px solid black',
+          backgroundColor: theme.palette.background.default,
+          boxSizing: 'border-box',
+          overflow: 'hidden',
+          '@media print': {
+            boxShadow: 'none',
+            border: 'none',
+            width: '210mm',
+            height: '297mm',
+            margin: 0,
+          },
         }}
       >
         <Typography variant="h5" fontWeight="bold" gutterBottom>

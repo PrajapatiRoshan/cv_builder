@@ -26,9 +26,6 @@ import API from './axios-client';
 //---------------------------Auth-------------------
 export const loginMutationFn = async (data: loginType): Promise<LoginResponseType> => {
   const response = await API.post('auth/login', data);
-
-  console.log(data, '----------------', response);
-
   return response?.data;
 };
 

@@ -14,14 +14,32 @@ const ResumeHeader = ({
     <Paper
       elevation={4}
       sx={{
-        border: '1px solid #ccc',
-        borderRadius: 2,
-        p: { xs: 2, sm: 4 },
         width: '100%',
-        borderColor: 'divider',
         minHeight: '70vh',
+        p: { xs: 2, sm: 4 },
+        border: '1px solid #ccc',
+        borderColor: 'divider',
+        borderRadius: 2,
         backgroundColor: theme.palette.background.default,
+        boxSizing: 'border-box',
+        overflow: 'hidden',
+        '@media print': {
+          boxShadow: 'none',
+          border: 'none',
+          width: '210mm',
+          height: '297mm',
+          margin: 0,
+        },
       }}
+      // sx={{
+      //   border: '1px solid #ccc',
+      //   borderRadius: 2,
+      //   p: { xs: 2, sm: 4 },
+      //   width: '100%',
+      //   borderColor: 'divider',
+      //   minHeight: '70vh',
+      //   backgroundColor: theme.palette.background.default,
+      // }}
     >
       <Box
         sx={{

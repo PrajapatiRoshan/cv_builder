@@ -8,7 +8,7 @@ export type LoginResponseType = {
     name: string;
     profilePicture?: string;
     email: string;
-    cvTemplateId: string;
+    cvTemplateId: string[];
   };
 };
 
@@ -29,7 +29,7 @@ export type UserType = {
   name: string;
   email: string;
   profilePicture?: string;
-  cvTemplateId: string;
+  cvTemplateId: string[];
   lastLogin?: null;
   createdAt?: Date;
   updatedAt?: Date;
@@ -159,6 +159,6 @@ export type AllTemplateResponseType = {
 export type updateUserDetailReqType = {
   email: string;
   name: string;
-  cvTemplateId: string;
+  cvTemplateId: string[];
 };
 

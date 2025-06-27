@@ -1,12 +1,13 @@
 import { Document, model, Schema } from 'mongoose';
 import { compareValue, hashValue } from '../utils/bcrypt.util';
 import { CvTemplateIdEnum, cvTemplateIdEnumType } from '../enums/cvTemplateId.enum';
+import { object } from 'zod';
 
 export interface UserImgnCV {
   name: string;
   email?: string;
   profilePicture?: string;
-  cvTemplateId?: cvTemplateIdEnumType;
+  cvTemplateId?: cvTemplateIdEnumType[];
   password?: string;
 }
 
@@ -41,7 +42,7 @@ const userSchema = new Schema<UserDocument>(
       select: true,
     },
     cvTemplateId: {
-      type: String,
+      type: [String],
       enum: Object.values(CvTemplateIdEnum),
       default: null,
     },

@@ -10,11 +10,9 @@ export const emailSchemaValid = z
 
 export const passwordSchemaValid = z.string().trim().min(8).max(255).optional();
 
-export const cvTemplateIdValid = z
-  .enum(
-    Object.values(CvTemplateIdEnum) as [cvTemplateIdEnumType, ...cvTemplateIdEnumType[]]
-  )
-  .optional();
+export const cvTemplateIdValid = z.enum(
+  Object.values(CvTemplateIdEnum) as [cvTemplateIdEnumType, ...cvTemplateIdEnumType[]]
+);
 
 export const registerSchema = z.object({
   name: z.string().trim().min(1).max(255),
@@ -26,8 +24,8 @@ export const registerSchema = z.object({
 export const updateSchema = z.object({
   name: z.string().trim().min(1).max(255),
   email: emailSchemaValid.optional(),
-
-  cvTemplateId: cvTemplateIdValid,
+  cvTemplateId: z.array(cvTemplateIdValid).optional(),
+  profilePicture: z.string().trim().optional(),
 });
 
 export const loginSchema = z.object({
