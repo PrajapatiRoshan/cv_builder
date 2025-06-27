@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Avatar, Box, IconButton } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 const UploadableAvatar = ({

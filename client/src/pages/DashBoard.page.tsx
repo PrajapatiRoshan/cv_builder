@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   CircularProgress,
   Container,
@@ -7,7 +6,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
 import { styled } from '@mui/system';
 import useAuth from '@/hooks/auth/use-auth';
 import { lazy, Suspense, useRef } from 'react';
