@@ -2,6 +2,7 @@ import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { HTTPSTATUS } from '../config/http.config';
 import { asyncHandler } from '../middlewares/asyncHandler.middleware';
 import {
+  createOrderService,
   deleteUserService,
   gelAllDetailsService,
   getCurrentUserService,
@@ -25,12 +26,24 @@ export const getCurrentUserController = asyncHandler(
 
 export const deleteUserController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id;
-  const { user } = await deleteUserService(userId);
+  console.log('delete user controller', userId);
+
+  await deleteUserService(userId);
   return res.status(HTTPSTATUS.OK).json({
     message: 'User deleted successfully',
-    user,
   });
 });
+
+export const createOrderController = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { amount, currency = 'INR', receipt } = req.body;
+    const { order } = await createOrderService({ amount, currency, receipt });
+    return res.status(HTTPSTATUS.OK).json({
+      message: 'User Payment successfully',
+      order,
+    });
+  }
+);
 
 export const updateDetailController = asyncHandler(
   async (req: Request, res: Response) => {

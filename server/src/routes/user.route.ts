@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import {
+  createOrderController,
   deleteUserController,
   getAllCvTemplatesController,
   getAllDetailsController,
@@ -17,6 +18,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 userRoute.get('/current', getCurrentUserController);
 
 userRoute.delete('/delete', deleteUserController);
+
+userRoute.post('/createOrder', createOrderController);
 
 userRoute.put('/updateDetails', updateDetailController);
 

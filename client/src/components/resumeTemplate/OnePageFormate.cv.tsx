@@ -65,28 +65,7 @@ const CVPreview = ({ data }: { data: AllUserDetailType }) => {
            */}
           <ResumeHeader user={user} details={details} />
         </CenteredSection>
-        {/* <Box
-          sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'auto',
-            padding: 2,
-          }}
-        >
-          <Box
-            sx={{
-              transform: 'scale(0.75)', // or calculate dynamically based on container
-              transformOrigin: 'top left',
-              '@media print': {
-                transform: 'none',
-              },
-            }}
-          >
-            <ResumeHeader user={user} details={details} />
-          </Box>
-        </Box> */}
+
         {educations && (
           <CVSection
             title="Education"
@@ -121,7 +100,6 @@ const CVPreview = ({ data }: { data: AllUserDetailType }) => {
       </ScrollContainer>
 
       <Footer>
-        {/* <DummyPayment /> */}
         <Button variant="contained" onClick={openDialog}>
           Download
         </Button>

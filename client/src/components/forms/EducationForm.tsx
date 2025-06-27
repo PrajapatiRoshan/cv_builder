@@ -43,8 +43,8 @@ const EducationForm: React.FC<EducationFormProps> = ({
       addMutation.mutate(payload, {
         onSuccess: (data) => {
           toastRef.current?.showToast(data.message || 'Education Added!', 'success');
-          refetch();
           refetchUserDetails();
+          refetch();
         },
         onError: (err) => {
           toastRef.current?.showToast(err?.message || 'Something went wrong!', 'error');
@@ -57,6 +57,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
           onSuccess: (data) => {
             toastRef.current?.showToast(data.message || 'Education Updated!', 'success');
             refetch();
+            refetchUserDetails();
           },
           onError: (err) => {
             toastRef.current?.showToast(err?.message || 'Something went wrong!', 'error');

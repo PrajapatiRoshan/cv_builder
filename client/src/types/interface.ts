@@ -81,4 +81,7 @@ export type AuthContextType = {
   isFetching: boolean;
   refetchAuth: () => void;
 };
-
+export interface MenuDotsProps {
+  onLogout?: () => void;
+  onDeleteAccount?: () => void;
+}

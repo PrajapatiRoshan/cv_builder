@@ -2,6 +2,8 @@ import { EducationType } from '@/types/api.type';
 import { Paper, Typography, Box, LinearProgress } from '@mui/material';
 
 const EducationSection = ({ edu }: { edu: EducationType }) => {
+  console.log(edu, '-------------');
+
   return (
     <Paper sx={{ p: 2, mb: 2, border: '1px solid', borderColor: 'divider' }}>
       <Box
@@ -13,7 +15,12 @@ const EducationSection = ({ edu }: { edu: EducationType }) => {
         }}
       >
         <Box sx={{ flex: 1 }}>
-          <Typography variant="h6" fontWeight="bold" textTransform="capitalize">
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            textTransform="capitalize"
+            color={edu.fontColor}
+          >
             {edu.degreeType} in {edu.fieldOfStudy}
           </Typography>
           <Typography>{edu.institutionName}</Typography>

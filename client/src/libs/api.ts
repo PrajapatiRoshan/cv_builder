@@ -40,6 +40,11 @@ export const getCurrentUserQueryFn = async (): Promise<CurrentUserResponseType> 
   return response?.data;
 };
 
+export const deleteUser = async (): Promise<CurrentUserResponseType> => {
+  const response = await API.delete(`/user/delete`);
+  return response?.data;
+};
+
 //---------------------------User-------------------
 export const getAllUserDetailsQueryFn = async (): Promise<AllUserDetailResponseType> => {
   const response = await API.get('user/allDetails');

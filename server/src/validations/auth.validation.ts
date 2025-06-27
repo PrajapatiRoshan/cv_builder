@@ -18,7 +18,7 @@ export const registerSchema = z.object({
   name: z.string().trim().min(1).max(255),
   email: emailSchemaValid,
   password: passwordSchemaValid,
-  cvTemplateId: cvTemplateIdValid,
+  cvTemplateId: z.array(cvTemplateIdValid).optional(),
 });
 
 export const updateSchema = z.object({

@@ -72,3 +72,54 @@ export const handlePrint = () => {
   }, 500);
 };
 
+const loadRazorpay = (src: string) =>
+  new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+
+export const handleRazorpayPayment = async () => {
+  const res = await loadRazorpay('https://checkout.razorpay.com/v1/checkout.js');
+  if (!res) {
+    alert('Razorpay SDK failed to load');
+    return;
+  }
+
+  const orderRes = await fetch('http://localhost:8000/user/createOrder', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ amount: 500 }),
+  });
+  const orderData = await orderRes.json();
+
+  const options = {
+    key: 'rzp_test_rSQ9hgAaVXTHD0',
+    amount: orderData.amount,
+    currency: orderData.currency,
+    name: 'CV builder',
+    description: 'Test Transaction',
+    order_id: orderData.id,
+    handler: function (response: any) {
+      alert(`Payment ID: ${response.razorpay_payment_id}`);
+      alert(`Order ID: ${response.razorpay_order_id}`);
+      alert(`Signature: ${response.razorpay_signature}`);
+    },
+    prefill: {
+      name: 'John Doe',
+      email: 'john@example.com',
+      contact: '9999999999',
+    },
+    theme: {
+      color: '#3399cc',
+    },
+  };
+
+  const rzp = new (window as any).Razorpay(options);
+  rzp.open();
+};
+

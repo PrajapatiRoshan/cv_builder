@@ -12,12 +12,16 @@ import { lazy, Suspense, useRef } from 'react';
 import useGetAllTemplateHook from '@/hooks/user/use-getAllTemplate';
 import templateJson from '@/assets/labStructure.json';
 import { useMutation } from '@tanstack/react-query';
-import { updateUserMutationFn } from '@/libs/api';
+import { deleteUser, updateUserMutationFn } from '@/libs/api';
 import ToastMessage from '@/components/ui/ToastMessage.com';
 import { useNavigate } from 'react-router';
 import { EDITOR_ROUTES } from '@/routes/common/routesPath';
 import { ToastMessageHandle } from '@/types/interface';
 import UploadableAvatar from '@/components/ui/UploadableAvatar';
+import MenuDots from '@/components/ui/MenuDots';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store/config.store';
+import { clearAccessToken, clearUser } from '@/store/auth-store';
 
 const HoverCard = lazy(() => import('@/components/ui/HoverCard.com'));
 
@@ -37,13 +41,15 @@ const DashboardPage = () => {
   const { data: templateData } = useGetAllTemplateHook();
   const userName = data?.user?.name || 'name';
   const { mutate } = useMutation({ mutationFn: updateUserMutationFn });
+  const { mutate: deleteMutate } = useMutation({ mutationFn: deleteUser });
   const toastRef = useRef<ToastMessageHandle>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleTemChoose = (templateId: string, isDelete: boolean = false): void => {
     if (!data) return;
-    let cvIds = data.user.cvTemplateId;
-    if (cvIds.includes(templateId)) {
+    let cvIds = data?.user?.cvTemplateId || [];
+    if (cvIds?.includes?.(templateId)) {
       if (!isDelete) {
         toastRef.current?.showToast('You already have this template.', 'info');
         return;
@@ -59,6 +65,7 @@ const DashboardPage = () => {
       name: data?.user?.name,
       email: data.user.email,
     };
+
     mutate(payLoad, {
       onSuccess: () => {
         if (isDelete) {
@@ -95,6 +102,26 @@ const DashboardPage = () => {
     });
   };
 
+  const handleLogout = () => {
+    dispatch(clearAccessToken());
+    dispatch(clearUser());
+  };
+
+  const handleDeleteAccount = () => {
+    deleteMutate(undefined, {
+      onSuccess: () => {
+        handleLogout();
+        toastRef.current?.showToast('Deleted successfully', 'success');
+        setTimeout(() => {
+          navigate(`/`);
+        }, 200);
+      },
+      onError: () => {
+        toastRef.current?.showToast('Error occurred while deleting.', 'error');
+      },
+    });
+  };
+
   const EditHandler = (templateId: string) =>
     navigate(`/editor/${EDITOR_ROUTES.USERDETAIL}?templateId=${templateId}`);
 
@@ -116,7 +143,10 @@ const DashboardPage = () => {
 
   return (
     <>
-      <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="xl" sx={{ position: 'relative', mt: 4, mb: 4 }}>
+        <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
+          <MenuDots onLogout={handleLogout} onDeleteAccount={handleDeleteAccount} />
+        </Box>
         <Stack alignItems="center" spacing={2} mb={4}>
           {/* <Avatar
             sx={{ width: 100, height: 100 }}
@@ -145,10 +175,10 @@ const DashboardPage = () => {
             </Typography>
             <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
               <Suspense fallback={<CircularProgress size="3rem" />}>
-                {!data?.user?.cvTemplateId.length ? (
+                {!data?.user?.cvTemplateId?.length ? (
                   <Typography color="text.secondary">No CVs created yet.</Typography>
                 ) : (
-                  data?.user?.cvTemplateId.map((_id) => (
+                  data?.user?.cvTemplateId?.map((_id) => (
                     <HoverCard
                       key={_id}
                       img={templateJson[_id as keyof typeof templateJson].img}
@@ -178,14 +208,14 @@ const DashboardPage = () => {
                     //     ? HoverText.EDIT
                     //     : HoverText.NEW
                     // }
-                    newCv={!data?.user?.cvTemplateId.includes(id)}
+                    newCv={!data?.user?.cvTemplateId?.includes(id)}
                     onClick={
-                      data?.user?.cvTemplateId.includes(id)
+                      data?.user?.cvTemplateId?.includes(id)
                         ? () => EditHandler(id)
                         : () => handleTemChoose(id)
                     }
                     delClick={() => handleTemChoose(id, true)}
-                    disable={data?.user?.cvTemplateId.includes(id)}
+                    disable={data?.user?.cvTemplateId?.includes(id)}
                   />
                 ))}
               </Suspense>

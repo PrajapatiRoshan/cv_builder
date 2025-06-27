@@ -9,6 +9,7 @@ import ExperienceModel, { ExperienceDocument } from '../models/experience.model'
 import ProjectModel, { ProjectDocument } from '../models/project.model';
 import SkillModel, { SkillDocument } from '../models/skill.model';
 import AccountModel, { AccountDocument } from '../models/account.model';
+import { razorpay } from '../config/razorpay.config';
 
 type FullUserData = {
   user: UserDocument | null;
@@ -39,33 +40,47 @@ export const deleteUserService = async (userId: string) => {
 
     const userAcc = await AccountModel.findOneAndDelete({ userId }).session(session);
     if (!userAcc) {
-      throw new NotFoundException('User details not found');
+      throw new NotFoundException('User Account not found');
     }
 
-    const userDetail = await UserDetailModel.findOneAndDelete({ userId }).session(
-      session
-    );
-    if (!userDetail) {
-      throw new NotFoundException('User details not found');
+    const userDetail = await UserDetailModel.find({ userId }).session(session);
+    if (!userDetail || userDetail.length === 0) {
+      await UserDetailModel.deleteOne({ userId }).session(session);
+      // throw new NotFoundException('User details not found');
     }
 
-    await EducationModel.deleteMany({ userId }).session(session);
-    await ExperienceModel.deleteMany({ userId }).session(session);
-    await ProjectModel.deleteMany({ userId }).session(session);
-    await SkillModel.deleteMany({ userId }).session(session);
+    await EducationModel?.deleteMany({ userId }).session(session);
+    await ExperienceModel?.deleteMany({ userId }).session(session);
+    await ProjectModel?.deleteMany({ userId }).session(session);
+    await SkillModel?.deleteMany({ userId }).session(session);
 
     await user.deleteOne({ session });
 
     await session.commitTransaction();
     session.endSession();
 
-    return { user };
+    return;
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
     throw error;
   } finally {
     session.endSession();
+  }
+};
+
+export const createOrderService = async (data: any) => {
+  try {
+    const options = {
+      amount: data.amount * 100,
+      currency: data.currency || 'INR',
+      receipt: data.receipt || `receipt_${Date.now()}`,
+    };
+    const order = await razorpay.orders.create(options);
+    return { order };
+  } catch (error) {
+    console.error('Order creation error:', error);
+    throw new Error('Failed to create Razorpay order');
   }
 };
 

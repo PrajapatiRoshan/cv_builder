@@ -1,4 +1,4 @@
-import { handlePrint } from '@/utility/helper';
+import { handlePrint, handleRazorpayPayment } from '@/utility/helper';
 import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
@@ -18,6 +18,7 @@ const DialogBox = forwardRef((_, ref) => {
     setTimeout(() => {
       setOpenDialog(false);
       handlePrint();
+      // handleRazorpayPayment();
     }, 1000);
   };
 

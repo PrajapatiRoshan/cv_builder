@@ -18,6 +18,9 @@ const appConfig = () => ({
 
   FRONTEND_ORIGIN: getEnv('FRONTEND_ORIGIN', 'localhost'),
   FRONTEND_GOOGLE_CALLBACK_URL: getEnv('FRONTEND_GOOGLE_CALLBACK_URL'),
+
+  Razorpay_KEY_ID: getEnv('Razorpay_KEY_ID'),
+  Razorpay_KEY_SECRET: getEnv('Razorpay_KEY_SECRET'),
 });
 export const config = appConfig();
 
